@@ -1,0 +1,24 @@
+name: Unzip and Run Executable
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  unzip-and-run:
+    runs-on: macos-latest  # Use macOS runner since we're running a Mac executable
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Unzip file
+        run: unzip asdf.zip
+
+      - name: Make executable
+        run: chmod +x ./mac
+
+      - name: Run executable
+        run: ./mac
